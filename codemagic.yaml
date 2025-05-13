@@ -9,12 +9,13 @@ workflows:
           script: |
             npm install
             npx pod-install ios
-    test:
-      scripts:
-        - name: Run tests
-          script: npx jest
-    publish:
-      scripts:
-        - name: Deploy to App Store
+        - name: Build iOS app
           script: |
-            fastlane ios release
+            npx react-native run-ios --configuration Release
+    test:
+      name: Run tests
+      script: npx jest
+    publish:
+      name: Deploy to App Store
+      script: |
+        fastlane ios release
