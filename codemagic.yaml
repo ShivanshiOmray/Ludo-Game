@@ -1,0 +1,20 @@
+workflows:
+  ios:
+    name: iOS build
+    platform: ios
+    xcode: latest
+    build:
+      scripts:
+        - name: Install dependencies
+          script: |
+            npm install
+            npx pod-install ios
+    test:
+      scripts:
+        - name: Run tests
+          script: npx jest
+    publish:
+      scripts:
+        - name: Deploy to App Store
+          script: |
+            fastlane ios release
