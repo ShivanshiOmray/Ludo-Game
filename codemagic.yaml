@@ -10,13 +10,14 @@ workflows:
           cd ios && pod install && cd ..
       - name: Build iOS app
         script: |
-          npx react-native run-ios --configuration Release
+          # Build the iOS app using xcodebuild
+          xcodebuild -workspace ios/ludo.xcworkspace -scheme ludo -configuration Release -sdk iphoneos
       - name: Run tests (optional)
         script: |
           npx jest
       - name: Build IPA
         script: |
-          xcodebuild archive -workspace ios/YourProject.xcworkspace -scheme ludo -archivePath $HOME/build/ludo.xcarchive
+          xcodebuild archive -workspace ios/ludo.xcworkspace -scheme ludo -archivePath $HOME/build/ludo.xcarchive
     artifacts:
       - $HOME/build/ludo.xcarchive
       - $HOME/build/ludo.ipa
